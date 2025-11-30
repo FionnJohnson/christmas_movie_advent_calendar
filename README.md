@@ -1,4 +1,4 @@
-# Christmas Movie Advent Calendar
+# Christmas Movie Advent Calendar 🎄
 
 *Built with Python and Streamlit, including optional NLP analysis*
 
