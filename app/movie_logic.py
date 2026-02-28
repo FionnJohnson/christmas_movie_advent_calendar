@@ -7,6 +7,7 @@ def randomise(df, calendar):
     :param df: Dataframe containing the cleaned movie dataset
     :param calendar: list of dataframe indices that have already been picked
     :return: returns a single row dataframe of the selected film
+             returns None in no films remain
     """
     remaining = df[~df.index.isin(calendar)]
 
