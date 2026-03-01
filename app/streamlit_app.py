@@ -2,9 +2,9 @@
 # imports
 import pandas as pd
 import streamlit as st
-from scripts.movie_logic import randomise
+from movie_logic import randomise
 
-films_df = pd.read_csv('data/cleaned_movies.csv')
+films_df = pd.read_csv('../data/cleaned_movies.csv')
 
 # -----------------------------
 # Session State Initialisation
