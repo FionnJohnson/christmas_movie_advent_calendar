@@ -10,6 +10,13 @@ films_df = pd.read_csv('data/cleaned_movies.csv')
 # Session State Initialisation
 # -----------------------------
 
+# Streamlit reruns script on every interaction, so any variables that need to persist between interactions 
+# must be stored in session_state.
+
+# calender: stores the film index for each of the 24 advent days
+# counter: tracks which advent day is currently being filled
+# current_film: stores the film currently being displayed
+
 if 'calendar' not in st.session_state:
     st.session_state.calendar = [None] * 24
 
@@ -19,9 +26,11 @@ if 'counter' not in st.session_state:
 if "current_film" not in st.session_state:
     st.session_state.current_film = None
 
-# ----------------------------------------------------------------------------------------- #
 
-# Page Layout
+# -------------------------------
+# Page Layout and markdown styles
+# -------------------------------
+
 
 st.set_page_config(page_title="Christmas Film Advent Calendar ", layout="wide")
 
@@ -34,9 +43,12 @@ st.markdown("<h4 style='text-align: center;'> For each day of Advent you can pre
             unsafe_allow_html=True)
 st.space()
 
-# ----------------------------------------------------------------------------------------- #
 
+
+# -----------------------------
 # Buttons and button logic
+# -----------------------------
+
 
 with st.container(border=False, horizontal_alignment="center"):
     col1, col2 = st.columns(2, border=False)
@@ -53,10 +65,10 @@ with st.container(border=False, horizontal_alignment="center"):
 
 
 if button_pressed and st.session_state.counter < 24:
-    film = randomise(films_df, st.session_state.calendar)       # returns a dataframe as we use sample in the function
+    film = randomise(films_df, st.session_state.calendar)       # returns a random film as a single entry dataframe
 
-    st.session_state.calendar[st.session_state.counter] = int(film.index[0])
-    st.session_state.current_film = film.iloc[0]        # this is me converting it into a series
+    st.session_state.calendar[st.session_state.counter] = int(film.index[0])     # updates the next slot of the calender with the film index
+    st.session_state.current_film = film.iloc[0]        # converting into a series
 
     st.session_state.counter += 1
     st.rerun()
@@ -68,9 +80,11 @@ if reset_button:
     st.session_state.calendar = [None] * 24
     st.rerun()
 
-# ----------------------------------------------------------------------------------------- #
 
-# Advent cards and Film descriptions
+
+# -----------------------------------
+# Advent cards 
+# -----------------------------------
 
 col1, col2 = st.columns(2, border=False)
 
@@ -102,13 +116,18 @@ with col1:
                         f"{films_df.iloc[st.session_state.calendar[index]]['title']}</div>",
                         unsafe_allow_html=True
                     )
+                    
                     clicked = st.button(f"{index + 1}")
 
                     if clicked:
-
                         film_idx = st.session_state.calendar[index]
-                        st.session_state.current_film = films_df.iloc[film_idx]     # returns a series because we are just selecting 1 row
+                        st.session_state.current_film = films_df.iloc[film_idx]
 
+
+
+# -----------------------------
+# Film descriptions
+# -----------------------------
 
 with col2:
     if st.session_state.counter > 0:
