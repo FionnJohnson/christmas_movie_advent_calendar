@@ -23,3 +23,6 @@ This repository includes :
 
 The cleaned dataset contains 102 Christams films filtered by vote count, film rating and whether the row had complete data.
 
+<hr>
+
+![Dashboard for Advent Calendar](screenshots/advent_calendar_ui.png)
