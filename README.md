@@ -2,6 +2,12 @@
 
 *Built with Python and Streamlit*
 
+
+
+## 🚀 Live Demo
+
+[Click here to use the app](https://fionn-advent.streamlit.app/)
+
 ---
 
 Interactive web application that picks a random Christmas film every day of December leading up to Christmas. 
