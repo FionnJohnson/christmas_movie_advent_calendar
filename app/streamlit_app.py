@@ -1,10 +1,16 @@
 
 # imports
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 from movie_logic import randomise
 
-films_df = pd.read_csv('../data/cleaned_movies.csv')
+BASE_DIR = Path(__file__).resolve().parent.parent
+data_path = BASE_DIR / "data" / "cleaned_movies.csv"
+
+films_df = pd.read_csv(data_path)
+
+
 
 # -----------------------------
 # Session State Initialisation
